@@ -30,7 +30,8 @@
 
 (defpackage #:bench-others
   (:use #:cl
-        #:lparallel.util)
+        #:lparallel.util
+        #:lparallel.defpun)
   (:import-from #:lparallel-bench
                 #:bench
                 #:make-bench-spec

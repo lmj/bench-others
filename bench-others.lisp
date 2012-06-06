@@ -44,7 +44,10 @@
       (pcall:pexec              pcall:join)
       (lparallel.promise:future lparallel.promise:force)))
 
-  (defparameter *fib-fns*  '(eager-fib  pcall-fib  lparallel-fib)))
+  (defparameter *fib-fns*  '(eager-fib
+                             pcall-fib
+                             lparallel-fib
+                             lparallel-fib*)))
 
 (defun reset ()
   (sleep 0.2)
@@ -76,6 +79,13 @@
                             (+ (,force f1) f2)))))))
 
 (define-fib)
+
+(defpun lparallel-fib* (n)
+  (if (< n 2)
+      n
+      (plet ((a (lparallel-fib* (- n 1)))
+             (b (lparallel-fib* (- n 2))))
+        (+ (the fixnum a) (the fixnum b)))))
 
 (defun bench-fib ()
   (let ((fns        *fib-fns*)
