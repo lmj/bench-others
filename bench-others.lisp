@@ -100,6 +100,14 @@
                                    "~&n ~3,d | ~15,a ~8,d~%"
                                    n fn time)))))))))))
 
+(defun run-suite (worker-count reset-fn &rest fns)
+  (when fns
+    (lparallel-bench:with-temp-kernel (worker-count)
+      (dolist (fn fns)
+        (funcall reset-fn)
+        (funcall fn))))
+  nil)
+
 (defun execute (worker-count)
   (setf (pcall:thread-pool-size) worker-count)
   (eager-future2:advise-thread-pool-size worker-count)

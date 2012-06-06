@@ -33,7 +33,6 @@
         #:lparallel.util)
   (:import-from #:lparallel-bench
                 #:bench
-                #:run-suite
                 #:make-bench-spec
                 #:collecting1
                 #:collect
