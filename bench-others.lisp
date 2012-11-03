@@ -80,7 +80,7 @@
 
 (define-fib)
 
-(defpun lparallel-fib* (n)
+(defpun* lparallel-fib* (n)
   (if (< n 2)
       n
       (plet ((a (lparallel-fib* (- n 1)))
@@ -112,7 +112,8 @@
 
 (defun run-suite (worker-count reset-fn &rest fns)
   (when fns
-    (lparallel-bench:with-temp-kernel (worker-count)
+    (lparallel-bench:with-temp-kernel ((- worker-count 1) :spin-count 20000)
+      (sleep 1.0)
       (dolist (fn fns)
         (funcall reset-fn)
         (funcall fn))))
