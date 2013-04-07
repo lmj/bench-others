@@ -87,6 +87,10 @@
              (b (lparallel-fib* (- n 2))))
         (+ (the fixnum a) (the fixnum b)))))
 
+(defmacro rebind (vars &body body)
+  `(let ,(mapcar #'list vars vars)
+     ,@body))
+
 (defun bench-fib ()
   (let ((fns        *fib-fns*)
         (trials     *trials*)

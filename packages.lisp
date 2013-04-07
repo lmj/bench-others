@@ -36,9 +36,7 @@
                 #:bench
                 #:make-bench-spec
                 #:collecting1
-                #:collect
-                #:make-random-vector
-                #:make-random-list)
+                #:collect)
   (:import-from #:trivial-garbage
                 #:gc)
   (:export #:execute))
